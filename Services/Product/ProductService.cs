@@ -9,11 +9,9 @@ namespace Services
     public class ProductsService : IProductsService
     {
         private readonly List<Product> Products = new List<Product>
-    {
-      new Product { Title= "DVD player" },
-      new Product { Title= "TV" },
-      new Product { Title= "Projector" }
-    };
+        {
+             new Product{name="prd1",price=12}
+        };
 
         public IEnumerable<Product> GetProducts()
         {
