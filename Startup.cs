@@ -20,6 +20,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Models;
 using MyShoppingCart.Infrastructure.Swagger;
+using MyShoppingCart.Services.ShoppingCart;
 using MyShoppingCart.Services.Users;
 using Services;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -142,6 +143,10 @@ namespace MyShoppingCart
             services.AddTransient<IUserService, UserService>();
             services.AddSingleton<IUserService, UserService>();
             services.AddScoped<IUserService, UserService>();
+
+            services.AddTransient<IShoppingCartService, ShoppingCartService>();
+            services.AddSingleton<IShoppingCartService, ShoppingCartService>();
+            services.AddScoped<IShoppingCartService, ShoppingCartService>();
 
             services.Configure<RouteOptions>(options => { options.LowercaseUrls = true; });
 
