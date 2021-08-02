@@ -2,21 +2,21 @@
 using Models;
 using MyShoppingCart.Repository.SqlServer;
 using System;
-
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
-namespace Services
+namespace MyShoppingCart.Services.Users
 {
-
-    public class ProductsService : IProductsService
+    public class UserService : IUserService
     {
-        public Response GetAllProductRequest(IConfiguration cnf)
+        public Response GetAllUserRequest(IConfiguration cnf)
         {
             var response = new Response();
             try
             {
-                var cnx = cnf.GetConnectionString("ConnectionString");
-                var repository = new ProductRepository(cnx);
+               var cnx = cnf.GetConnectionString("ConnectionString");
+                var repository = new UserRepository(cnx);
 
                 var data = repository.GetAll();
 

@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Microsoft.Extensions.Configuration;
+using Models;
 using System;
 using System.Collections.Generic;
 
@@ -6,6 +7,6 @@ namespace Services
 {
     public interface IProductsService
     {
-        IEnumerable<Product> GetProducts();
+        Response GetAllProductRequest(IConfiguration cnf);
     }
 }

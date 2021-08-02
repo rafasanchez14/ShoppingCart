@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MyShoppingCart.Controllers.Security.Login
+namespace Security
 {
-    public class LoginController : Controller
+    public class BaseAuthController
     {
         [Produces("application/json")]
         [Route("api/v{version:apiVersion}/[controller]")]

@@ -13,9 +13,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Models;
-using static MyShoppingCart.Controllers.Security.Login.LoginController;
+using static Security.BaseAuthController;
 
-namespace AuthenticationandAuthorization.Controllers
+namespace Security
 {
     public class AuthenticateController : BaseController
     {

@@ -20,6 +20,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Models;
 using MyShoppingCart.Infrastructure.Swagger;
+using MyShoppingCart.Services.Users;
 using Services;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -56,6 +57,8 @@ namespace MyShoppingCart
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])) //Configuration["JwtToken:SecretKey"]  
                 };
             });
+
+            services.AddSingleton(Configuration);
 
         }
 
@@ -135,8 +138,15 @@ namespace MyShoppingCart
             services.AddTransient<IProductsService, ProductsService>();
             services.AddSingleton<IProductsService, ProductsService>();
             services.AddScoped<IProductsService, ProductsService>();
+
+            services.AddTransient<IUserService, UserService>();
+            services.AddSingleton<IUserService, UserService>();
+            services.AddScoped<IUserService, UserService>();
+
             services.Configure<RouteOptions>(options => { options.LowercaseUrls = true; });
+
            
+
         }
 
 
