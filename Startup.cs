@@ -20,7 +20,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Models;
 using MyShoppingCart.Infrastructure.Swagger;
+using MyShoppingCart.Services.Redis;
 using MyShoppingCart.Services.ShoppingCart;
+using MyShoppingCart.Services.User;
 using MyShoppingCart.Services.Users;
 using Services;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -60,6 +62,11 @@ namespace MyShoppingCart
             });
 
             services.AddSingleton(Configuration);
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration =
+                    $"{Configuration.GetValue<string>("Redis:Server")}:{Configuration.GetValue<int>("Redis:Port")}";
+            });
 
         }
 
@@ -147,6 +154,10 @@ namespace MyShoppingCart
             services.AddTransient<IShoppingCartService, ShoppingCartService>();
             services.AddSingleton<IShoppingCartService, ShoppingCartService>();
             services.AddScoped<IShoppingCartService, ShoppingCartService>();
+
+            services.AddTransient<ICacheService, CacheService>();
+            services.AddSingleton<ICacheService, CacheService>();
+            services.AddScoped<ICacheService, CacheService>();
 
             services.Configure<RouteOptions>(options => { options.LowercaseUrls = true; });
 

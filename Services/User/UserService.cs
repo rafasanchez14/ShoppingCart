@@ -1,24 +1,25 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Models;
-using MyShoppingCart.Repository.SqlServer;
+using MyShoppingCart.Repository.Redis;
+using MyShoppingCart.Services.Users;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MyShoppingCart.Services.Users
+namespace MyShoppingCart.Services.User
 {
     public class UserService : IUserService
     {
-        public Response GetAllUserRequest(IConfiguration cnf)
+        public Response GetAllUserRequest(ICacheService cache)
         {
             var response = new Response();
             try
             {
-               var cnx = cnf.GetConnectionString("ConnectionString");
-                var repository = new UserRepository(cnx);
+                var repository = new UserRepository(cache);
 
-                var data = repository.GetAll();
+                var data = repository.GetListUsers();
 
                 if (data.Count > 0)
                 {
@@ -46,7 +47,7 @@ namespace MyShoppingCart.Services.Users
                 response.errorCode = 1;
                 response.message = ex.Message;
                 response.warningMessage = "";
-                response.responseCode = 404;
+                response.responseCode = 400;
 
             }
 

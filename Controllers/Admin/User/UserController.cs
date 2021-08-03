@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Models;
 using MyShoppingCart.Services.Users;
+using Services;
 
 namespace api.Admin.Controllers
 {
@@ -14,12 +15,13 @@ namespace api.Admin.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _service;
-        private readonly IConfiguration _config;
+        private readonly ICacheService _cache;
 
-        public UserController(IUserService service,IConfiguration configuration)
+
+        public UserController(IUserService service, ICacheService cache)
         {
             _service = service;
-            _config = configuration;
+            _cache = cache;
         }
 
         [HttpGet]
@@ -27,7 +29,7 @@ namespace api.Admin.Controllers
         {
             try
             {
-                return _service.GetAllUserRequest(_config);
+                return _service.GetAllUserRequest(_cache);
             }
             catch (Exception)
             {

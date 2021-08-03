@@ -7,8 +7,10 @@ namespace Services
 {
     public interface IShoppingCartService
     {
-        Response GetAllProductRequest(IConfiguration cnf);
 
-        Response PostShoppingCart(IConfiguration cnf,ShoppingCart shoppingCart);
+        Response PostShoppingCart(ShoppingCart shoppingCart,ICacheService cache);
+
+
+        Response GetShoppingCart( int id,ICacheService cache);
     }
 }

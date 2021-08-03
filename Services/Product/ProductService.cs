@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Models;
-using MyShoppingCart.Repository.SqlServer;
+using MyShoppingCart.Repository.Redis;
 using System;
 
 using System.Linq;
@@ -10,15 +10,14 @@ namespace Services
 
     public class ProductsService : IProductsService
     {
-        public Response GetAllProductRequest(IConfiguration cnf)
+        public Response GetAllProductRequest(ICacheService cache)
         {
             var response = new Response();
             try
             {
-                var cnx = cnf.GetConnectionString("ConnectionString");
-                var repository = new ProductRepository(cnx);
+                var repository = new ProductRepository(cache);
 
-                var data = repository.GetAll();
+                var data = repository.GetListProducts();
 
                 if (data.Count > 0)
                 {
@@ -46,7 +45,7 @@ namespace Services
                 response.errorCode = 1;
                 response.message = ex.Message;
                 response.warningMessage = "";
-                response.responseCode = 404;
+                response.responseCode = 400;
 
             }
 

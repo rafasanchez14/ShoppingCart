@@ -7,6 +7,6 @@ namespace Services
 {
     public interface IProductsService
     {
-        Response GetAllProductRequest(IConfiguration cnf);
+        Response GetAllProductRequest(ICacheService cache);
     }
 }

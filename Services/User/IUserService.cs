@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Models;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace MyShoppingCart.Services.Users
 {
     public interface IUserService
     {
-        Response GetAllUserRequest(IConfiguration cnf);
+        Response GetAllUserRequest(ICacheService cache);
     }
 }

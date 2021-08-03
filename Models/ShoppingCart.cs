@@ -7,7 +7,7 @@ namespace Models
 {
     public class ShoppingCart
     {
-        public int shoppingCartId { get; set; }
+        public string productCode { get; set; }
 
         public int productId { get; set; }
 
@@ -15,4 +15,5 @@ namespace Models
 
         public int quantity { get; set; }
     }
+
 }

@@ -17,17 +17,17 @@ namespace api.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductsService _productsService;
-        private readonly IConfiguration _config;
-        public ProductsController(IProductsService productsService, IConfiguration configuration)
+        private readonly ICacheService _cache;
+        public ProductsController(IProductsService productsService, ICacheService cache)
         {
             _productsService = productsService;
-            _config = configuration;
+            _cache = cache;
         }
 
         [HttpGet]
         public Response GetProducts()
         {
-            return _productsService.GetAllProductRequest(_config);
+            return _productsService.GetAllProductRequest(_cache);
         }
     }
 }
