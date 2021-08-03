@@ -9,7 +9,7 @@ namespace Models
     {
         public int errorCode { get; set; }
 
-        public string  errorMessage { get; set; }
+        public string  message { get; set; }
 
         public string warningMessage { get; set; }
 

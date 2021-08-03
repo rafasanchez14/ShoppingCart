@@ -24,7 +24,7 @@ namespace Services
                 {
                     response.data = data;
                     response.errorCode = 0;
-                    response.errorMessage = "";
+                    response.message = "";
                     response.warningMessage = "";
                     response.responseCode = 200;
                 }
@@ -32,7 +32,7 @@ namespace Services
                 {
                     response.data = null;
                     response.errorCode = 1;
-                    response.errorMessage = "No se encontró información";
+                    response.message = "No se encontró información";
                     response.warningMessage = "";
                     response.responseCode = 404;
                 }
@@ -44,7 +44,7 @@ namespace Services
 
                 response.data = null;
                 response.errorCode = 1;
-                response.errorMessage = ex.Message;
+                response.message = ex.Message;
                 response.warningMessage = "";
                 response.responseCode = 404;
 

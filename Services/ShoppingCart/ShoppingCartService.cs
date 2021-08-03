@@ -25,7 +25,7 @@ namespace MyShoppingCart.Services.ShoppingCart
                 {
                     response.data = data;
                     response.errorCode = 0;
-                    response.errorMessage = "";
+                    response.message = "";
                     response.warningMessage = "";
                     response.responseCode = 200;
                 }
@@ -33,7 +33,7 @@ namespace MyShoppingCart.Services.ShoppingCart
                 {
                     response.data = null;
                     response.errorCode = 1;
-                    response.errorMessage = "No se encontró información";
+                    response.message = "No se encontró información";
                     response.warningMessage = "";
                     response.responseCode = 404;
                 }
@@ -45,7 +45,7 @@ namespace MyShoppingCart.Services.ShoppingCart
 
                 response.data = null;
                 response.errorCode = 1;
-                response.errorMessage = ex.Message;
+                response.message = ex.Message;
                 response.warningMessage = "";
                 response.responseCode = 400;
 
@@ -68,7 +68,7 @@ namespace MyShoppingCart.Services.ShoppingCart
                 {
                     response.data = saved_data;
                     response.errorCode = 0;
-                    response.errorMessage = "";
+                    response.message = "Se ha agregado item al carrito exitósamente";
                     response.warningMessage = "";
                     response.responseCode = 200;
                 }
@@ -76,7 +76,7 @@ namespace MyShoppingCart.Services.ShoppingCart
                 {
                     response.data = saved_data;
                     response.errorCode = 2;
-                    response.errorMessage = "Ocurrio un error al insertar informacion";
+                    response.message = "Ocurrio un error al insertar informacion";
                     response.warningMessage = "";
                     response.responseCode = 400;
                 }
@@ -87,7 +87,7 @@ namespace MyShoppingCart.Services.ShoppingCart
 
                 response.data = null;
                 response.errorCode = 1;
-                response.errorMessage = ex.Message;
+                response.message = ex.Message;
                 response.warningMessage = "";
                 response.responseCode = 400;
             }
