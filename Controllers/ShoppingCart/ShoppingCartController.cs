@@ -38,7 +38,7 @@ namespace api.Controllers
         public Response GetShopping(int id)
         {
 
-            return _service.GetShoppingCart(id, _cache);
+            return _service.GetShoppingCartResume(id, _cache);
         }
     }
 }

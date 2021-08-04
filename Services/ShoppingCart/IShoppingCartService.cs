@@ -12,5 +12,7 @@ namespace Services
 
 
         Response GetShoppingCart( int id,ICacheService cache);
+
+        Response GetShoppingCartResume(int id, ICacheService cache);
     }
 }

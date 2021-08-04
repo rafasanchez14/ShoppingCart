@@ -2,6 +2,7 @@
 using Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MyShoppingCart.Repository.Redis
 {
@@ -18,14 +19,16 @@ namespace MyShoppingCart.Repository.Redis
           
             try
             {
+                shopping.creationDate = DateTime.Now;
                 var cached = _cache.Get<List<ShoppingCart>>(shopping.userId.ToString());
-
                 if (cached!=null && cached.Count>0)
                 {
+                    
                     cached.Add(shopping);
                 }
                 else
                 {
+
                     cached = new List<ShoppingCart>();
                     cached.Add(shopping);
 
@@ -57,6 +60,7 @@ namespace MyShoppingCart.Repository.Redis
                 
                 if (cached!=null)
                 {
+
                     return cached;
                 }
                 else
@@ -73,6 +77,8 @@ namespace MyShoppingCart.Repository.Redis
                 throw new Exception(ex.Message);
             }
         }
+
+        
 
     }
 }

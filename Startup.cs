@@ -21,7 +21,6 @@ using Microsoft.OpenApi.Models;
 using Models;
 using MyShoppingCart.Infrastructure.Swagger;
 using MyShoppingCart.Services.Redis;
-using MyShoppingCart.Services.ShoppingCart;
 using MyShoppingCart.Services.User;
 using MyShoppingCart.Services.Users;
 using Services;
