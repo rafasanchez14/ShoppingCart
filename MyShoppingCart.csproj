@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Server Redis %28in-memory%29\**" />
+    <Compile Remove="ShoppinCart-DEMO\**" />
+    <Content Remove="Server Redis %28in-memory%29\**" />
+    <Content Remove="ShoppinCart-DEMO\**" />
+    <EmbeddedResource Remove="Server Redis %28in-memory%29\**" />
+    <EmbeddedResource Remove="ShoppinCart-DEMO\**" />
+    <None Remove="Server Redis %28in-memory%29\**" />
+    <None Remove="ShoppinCart-DEMO\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.17" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
