@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services;
 
@@ -16,23 +11,30 @@ namespace api.Controllers
     public class ShoppingCartController : ControllerBase
     {
         private readonly IShoppingCartService _service;
-        private readonly IConfiguration _config;
         private readonly ICacheService _cache;
-        public ShoppingCartController(IShoppingCartService shoppingCartService, IConfiguration configuration, ICacheService cache)
+        public ShoppingCartController(IShoppingCartService shoppingCartService, ICacheService cache)
         {
             _service = shoppingCartService;
-            _config = configuration;
             _cache = cache;
         }
 
+        /// <summary>
+        ///  Add item to basket/cart
+        /// </summary>
+        /// <param name="shoppingCart"></param>
+        /// <returns> General response</returns>
         [HttpPost]
         public Response PostShopping(ShoppingCart shoppingCart)
         {
-          
+
             return _service.PostShoppingCart(shoppingCart,_cache);
         }
 
-
+        /// <summary>
+        /// Get information about the items on the users basket
+        /// </summary>
+        /// <param name="id">User Id</param>
+        /// <returns>General response</returns>
         [HttpGet]
         [Route("{id}")]
         public Response GetShopping(int id)

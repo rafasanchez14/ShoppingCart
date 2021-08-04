@@ -1,17 +1,14 @@
-﻿using Microsoft.Extensions.Configuration;
-using Models;
+﻿using Models;
 using MyShoppingCart.Repository.Redis;
-using MyShoppingCart.Services.User;
-using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Services
 {
     public class ShoppingCartService : IShoppingCartService
     {
+        //Guarda información de carrito de compra
         public Response PostShoppingCart(ShoppingCart shoppingCart, ICacheService cache)
         {
             var response = new Response();
@@ -20,23 +17,50 @@ namespace Services
 
             try
             {
-               var saved_data = repository.Post(shoppingCart);
-
-                if (saved_data.Count>0)
+                var userService = new UserRepository(cache);
+                var userInfoDetail = userService.GetListUsers().FirstOrDefault(q => q.userId == shoppingCart.userId);
+                if (userInfoDetail == null)
                 {
-                    response.data = saved_data;
-                    response.errorCode = 0;
-                    response.message = "Se ha agregado item al carrito exitósamente";
-                    response.warningMessage = "";
-                    response.responseCode = 200;
+                    response.data = shoppingCart.userId;
+                    response.errorCode = 3;
+                    response.message = "Usuario no encontrado";
+                    response.warningMessage = "Por favor verifíque lista de usuarios";
+                    response.responseCode = 404;
+
+                    return response;
+                }
+                var productRepository = new ProductRepository(cache);
+                var prodInfoDetail = productRepository.GetListProducts().FirstOrDefault(q => q.productCode == shoppingCart.productCode);
+                if (prodInfoDetail == null)
+                {
+                    response.data = shoppingCart.productCode;
+                    response.errorCode = 4;
+                    response.message = "Producto no encontrado";
+                    response.warningMessage = "Por favor verifíque lista de productos";
+                    response.responseCode = 404;
+
+                    return response;
                 }
                 else
                 {
-                    response.data = saved_data;
-                    response.errorCode = 2;
-                    response.message = "Ocurrio un error al insertar informacion";
-                    response.warningMessage = "";
-                    response.responseCode = 400;
+                    var saved_data = repository.Post(shoppingCart);
+
+                    if (saved_data.Count > 0)
+                    {
+                        response.data = saved_data;
+                        response.errorCode = 0;
+                        response.message = "Se ha agregado item al carrito exitósamente";
+                        response.warningMessage = "";
+                        response.responseCode = 200;
+                    }
+                    else
+                    {
+                        response.data = saved_data;
+                        response.errorCode = 2;
+                        response.message = "Ocurrio un error al insertar informacion";
+                        response.warningMessage = "";
+                        response.responseCode = 400;
+                    }
                 }
 
             }
@@ -53,6 +77,7 @@ namespace Services
             return response;
         }
 
+        //Obtiene información del carrito de compra
         public Response GetShoppingCart(int id,ICacheService cache)
         {
             var response = new Response();
@@ -95,7 +120,7 @@ namespace Services
             return response;
         }
 
-
+        //Obtiene resúmen de agregados
         public Response GetShoppingCartResume(int id, ICacheService cache)
         {
             var response = new Response();
@@ -140,7 +165,7 @@ namespace Services
             return response;
         }
 
-
+        //Crear resumen de agregados al carrito
         private ShoppingCartResumeHeader CreateResumeShoppingCart(List<ShoppingCart> list, ICacheService cache)
         {
 

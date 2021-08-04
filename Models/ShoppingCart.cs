@@ -1,16 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Models
 {
     public class ShoppingCart
     {
-
+        [Required]
         public int userId { get; set; }
+
+        [Required]
         public string productCode { get; set; }
+
+        [Required]
         public int quantity { get; set; }
 
         [JsonIgnore]

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using api.Controllers;
@@ -140,6 +142,9 @@ namespace MyShoppingCart
             {
                 // add a custom operation filter which sets default values
                 options.OperationFilter<SwaggerDefaultValues>();
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
             });
 
             services.AddTransient<IProductsService, ProductsService>();
@@ -161,6 +166,7 @@ namespace MyShoppingCart
             services.Configure<RouteOptions>(options => { options.LowercaseUrls = true; });
 
            
+
 
         }
 

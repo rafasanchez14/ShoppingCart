@@ -1,15 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
-using Models;
+﻿using Models;
 using MyShoppingCart.Repository.Redis;
 using System;
-
-using System.Linq;
 
 namespace Services
 {
 
     public class ProductsService : IProductsService
     {
+        //obtiene listado de productos
         public Response GetAllProductRequest(ICacheService cache)
         {
             var response = new Response();

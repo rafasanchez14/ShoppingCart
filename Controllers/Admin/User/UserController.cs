@@ -1,15 +1,14 @@
-﻿using System;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Models;
 using MyShoppingCart.Services.Users;
 using Services;
+using System;
 
 namespace api.Admin.Controllers
 {
     [ApiController]
-   // [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/v{version:apiVersion}/admin/[controller]")]
     [ApiVersion("1.0")]
     public class UserController : ControllerBase
@@ -24,6 +23,12 @@ namespace api.Admin.Controllers
             _cache = cache;
         }
 
+
+
+        /// <summary>
+        /// Get list of users (only admins)
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public Response GetUsers()
         {

@@ -1,17 +1,14 @@
-﻿using Microsoft.Extensions.Configuration;
-using Models;
+﻿using Models;
 using MyShoppingCart.Repository.Redis;
 using MyShoppingCart.Services.Users;
 using Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyShoppingCart.Services.User
 {
     public class UserService : IUserService
     {
+        //Obtiene usuarios registrados
         public Response GetAllUserRequest(ICacheService cache)
         {
             var response = new Response();

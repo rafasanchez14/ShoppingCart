@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Models;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using System.Threading.Tasks;
 using static Security.BaseAuthController;
 
 namespace Security
@@ -72,9 +69,9 @@ namespace Security
 
             //Validate the User Credentials      
             //Demo Purpose, I have Passed HardCoded User Information      
-            if (login.UserName == "Jay")
+            if (login.UserName == "ADMIN")
             {
-                user = new Login { UserName = "Jay", Password = "123456" };
+                user = new Login { UserName = "ADMIN", Password = "123456" };
             }
             return user;
         }

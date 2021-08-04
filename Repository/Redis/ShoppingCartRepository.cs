@@ -13,12 +13,13 @@ namespace MyShoppingCart.Repository.Redis
         {
             _cache = cache;
         }
-
+        //Agrega información de carrito a memoria
         public List<ShoppingCart> Post(ShoppingCart shopping)
         {
           
             try
             {
+                //Fecha de creación
                 shopping.creationDate = DateTime.Now;
                 var cached = _cache.Get<List<ShoppingCart>>(shopping.userId.ToString());
                 if (cached!=null && cached.Count>0)
@@ -31,10 +32,12 @@ namespace MyShoppingCart.Repository.Redis
 
                     cached = new List<ShoppingCart>();
                     cached.Add(shopping);
-
+                    Console.WriteLine("[BASKET CREATED]: Created[<" + shopping.creationDate.ToString("dd-MM-yyyy") + ">], " +shopping.userId);
 
                 }
-
+                var productRepository = new ProductRepository(_cache);
+                var prodInfoDetail = productRepository.GetListProducts().FirstOrDefault(q => q.productCode == shopping.productCode);
+                Console.WriteLine("[ITEM ADDED TO SHOPPING CART]: Added[<" + shopping.creationDate.ToString("dd-MM-yyyy") + ">], " + shopping.userId + ", " + shopping.productCode + ", " + shopping.quantity + "[, Price[<€"+ prodInfoDetail .price+ ">]");
                 _cache.Set<List<ShoppingCart>>(shopping.userId.ToString(), cached);
 
                 return cached;
@@ -51,9 +54,9 @@ namespace MyShoppingCart.Repository.Redis
             
         }
 
+        //Consulta carrito por usuario
         public List<ShoppingCart> GetShoppingCartByUser(int id)
         {
-            var shoppingList = new List<ShoppingCart>();
             try
             {
                 var cached = _cache.Get<List<ShoppingCart>>(id.ToString());

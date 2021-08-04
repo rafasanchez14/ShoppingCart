@@ -24,6 +24,10 @@ namespace api.Controllers
             _cache = cache;
         }
 
+        /// <summary>
+        /// Get list of products
+        /// </summary>
+        /// <returns>General response</returns>
         [HttpGet]
         public Response GetProducts()
         {
