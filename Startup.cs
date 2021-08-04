@@ -75,8 +75,7 @@ namespace MyShoppingCart
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
 
-            if (env.IsDevelopment())
-            {
+            
                 app.UseDeveloperExceptionPage();
                // app.UseSwagger();
                 //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CoolWebApi v1"));
@@ -87,7 +86,7 @@ namespace MyShoppingCart
                     foreach (var description in provider.ApiVersionDescriptions)
                         options.SwaggerEndpoint($"/api-docs/{description.GroupName}/docs.json", description.GroupName.ToUpperInvariant());
                 });
-            }
+            
 
             app.UseHttpsRedirection();
 
