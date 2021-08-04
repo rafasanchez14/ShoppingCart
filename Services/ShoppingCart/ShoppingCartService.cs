@@ -168,7 +168,10 @@ namespace Services
         //Crear resumen de agregados al carrito
         private ShoppingCartResumeHeader CreateResumeShoppingCart(List<ShoppingCart> list, ICacheService cache)
         {
-
+            System.Globalization.CultureInfo customCulture = (System.Globalization.CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
+            customCulture.NumberFormat.NumberDecimalSeparator = ".";
+            System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
+            var sCurrency = "€";
             try
             {
                 var shoppingCartResume = new ShoppingCartResumeHeader();
@@ -187,17 +190,20 @@ namespace Services
                                                         productCode = cl.First().productCode,
                                                         name = "",
                                                         quantity = Convert.ToInt32(cl.Sum(c => c.quantity)),
-                                                        total = 0,
+                                                        dtotal = 0,
                                                     }).ToList();
                     result.ForEach(x => {
                         var productRepository = new ProductRepository(cache);
                         var prodInfoDetail = productRepository.GetListProducts().FirstOrDefault(q => q.productCode == x.productCode);
                         x.name = prodInfoDetail.name;
-                        x.unitPrice = prodInfoDetail.price;
-                        x.total = x.unitPrice * x.quantity;
+                        x.dunitPrice = prodInfoDetail.price;
+                        x.unitPrice = sCurrency + x.dunitPrice.ToString("F");
+                        x.dtotal = x.dunitPrice * x.quantity;
+                        x.total = sCurrency + x.dtotal.ToString("F");
                     });
                     shoppingCartResume.detail = result;
-                    shoppingCartResume.total = result.Sum(x => x.total);
+                    shoppingCartResume.dtotal = result.Sum(x => x.dtotal);
+                    shoppingCartResume.total = sCurrency+ shoppingCartResume.dtotal.ToString("F");
                 }
 
                 return shoppingCartResume;

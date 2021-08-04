@@ -37,7 +37,7 @@ namespace MyShoppingCart.Repository.Redis
                 }
                 var productRepository = new ProductRepository(_cache);
                 var prodInfoDetail = productRepository.GetListProducts().FirstOrDefault(q => q.productCode == shopping.productCode);
-                Console.WriteLine("[ITEM ADDED TO SHOPPING CART]: Added[<" + shopping.creationDate.ToString("dd-MM-yyyy") + ">], " + shopping.userId + ", " + shopping.productCode + ", " + shopping.quantity + "[, Price[<€"+ prodInfoDetail .price+ ">]");
+                Console.WriteLine("[ITEM ADDED TO SHOPPING CART]: Added[<" + shopping.creationDate.ToString("dd-MM-yyyy") + ">],  UserId" + shopping.userId + ", ProductID " + shopping.productCode + ", " + shopping.quantity + "[, Price[<"+ prodInfoDetail .price+ ">]");
                 _cache.Set<List<ShoppingCart>>(shopping.userId.ToString(), cached);
 
                 return cached;

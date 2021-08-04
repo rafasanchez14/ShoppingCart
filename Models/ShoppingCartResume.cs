@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Models
 {
@@ -12,9 +13,10 @@ namespace Models
 
         public List<ShoppingCartResumeDetail> detail{ get; set; }
 
-        public decimal total { get; set; }
+        [JsonIgnore]
+        public decimal dtotal { get; set; }
 
-
+        public string total { get; set; }
     }
 
     public class ShoppingCartResumeDetail
@@ -23,8 +25,15 @@ namespace Models
 
         public string name { get; set; }
         public int quantity { get; set; }
-        public decimal unitPrice { get; set; }
-        public decimal total { get; set; }
+
+        [JsonIgnore]
+        public decimal dunitPrice { get; set; }
+        [JsonIgnore]
+        public decimal dtotal { get; set; }
+
+        public string unitPrice { get; set; }
+        public string total { get; set; }
+
 
     }
 }
