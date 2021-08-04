@@ -21,7 +21,8 @@ El siguiente proyecto es un demo de un carrito/cesta de compras
 6) Ingresar en https://localhost:50001/api-docs/index.html
 
 ###Tips
-En caso de error al ejecutar el paso 3 descargar de aqui y reintentar ejecutar el archivo
+En caso de error al ejecutar el paso 3 descargar de aqui shorturl.at/oxGIK y reintentar ejecutar el archivo
+
 
 
 
